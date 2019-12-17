@@ -1,20 +1,18 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  console.log(123);
-  return (
-    <View style={styles.container}>
-      <Text>Hellooooo</Text>
-    </View>
-  );
-}
+import WeatherScreen from './src/screens/WeatherScreen';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+const navigator = createStackNavigator(
+  {
+    Weather: WeatherScreen
+  },
+  {
+    initialRouteName: 'Weather',
+    defaultNavigationOptions: {
+      title: 'Weather App'
+    }
   }
-});
+);
+
+export default createAppContainer(navigator);
