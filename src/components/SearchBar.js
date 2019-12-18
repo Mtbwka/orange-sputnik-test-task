@@ -2,22 +2,29 @@ import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const SearchBar = () => {
+const SearchBar = ({ city, onCityChange, onCitySubmit }) => {
   return (
     <View style={styles.backgroundStyle}>
       <FontAwesome name='search' style={styles.iconStyle} />
-      <TextInput placeholder='Seach' style={styles.inputStyle} />
+      <TextInput
+        value={city}
+        placeholder='Seach'
+        style={styles.inputStyle}
+        autoCapitalize='none'
+        autoCorrect={false}
+        onChangeText={onCityChange}
+        onEndEditing={onCitySubmit}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   backgroundStyle: {
-    marginTop: 15,
     backgroundColor: '#F0EEEE',
     height: 50,
-    borderRadius: 5,
-    marginHorizontal: 15,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
     flexDirection: 'row'
   },
   inputStyle: {
@@ -27,7 +34,8 @@ const styles = StyleSheet.create({
   iconStyle: {
     fontSize: 35,
     alignSelf: 'center',
-    marginHorizontal: 15
+    marginHorizontal: 15,
+    paddingVertical: 10
   }
 });
 

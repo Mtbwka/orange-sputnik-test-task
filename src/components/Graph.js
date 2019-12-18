@@ -1,59 +1,34 @@
 import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from 'react-native-chart-kit';
+import { StackedBarChart } from 'react-native-chart-kit';
+import convert from '../util/converter';
 
-const Graph = () => {
-  const screenWidth = Dimensions.get('window').width;
+const Graph = ({ forecast }) => {
+  const { labels, data } = convert(forecast);
 
-  <LineChart
-    data={{
-      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-      datasets: [
-        {
-          data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100
-          ]
-        }
-      ]
-    }}
-    width={Dimensions.get('window').width} // from react-native
-    height={220}
-    yAxisLabel={'$'}
-    yAxisSuffix={'k'}
-    chartConfig={{
-      backgroundColor: '#e26a00',
-      backgroundGradientFrom: '#fb8c00',
-      backgroundGradientTo: '#ffa726',
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      },
-      propsForDots: {
-        r: '6',
-        strokeWidth: '2',
-        stroke: '#ffa726'
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16
-    }}
-  />;
+  return (
+    <StackedBarChart
+      data={{
+        labels,
+        legend: ['Night', 'Day'],
+        data,
+        barColors: ['#071c73', '#e38a07']
+      }}
+      width={Dimensions.get('window').width - 30} // from react-native
+      height={300}
+      chartConfig={{
+        backgroundColor: '#00e2c4',
+        backgroundGradientFrom: '#8191d6',
+        backgroundGradientTo: '#031563',
+        decimalPlaces: 0,
+        color: (opacity = 0) => `rgba(0, 0, 255, ${opacity})`,
+        labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`
+      }}
+      style={{
+        marginVertical: 10
+      }}
+    />
+  );
 };
 
 export default Graph;
