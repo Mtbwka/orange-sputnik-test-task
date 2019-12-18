@@ -20,17 +20,11 @@ const convert = input => {
     values = [...values, temp];
   }
 
-  function getUnique(arr, comp) {
-    const unique = arr
-      .map(element => element[comp])
-      .map((element, index, final) => final.indexOf(element) === index && index)
-      .filter(element => arr[element])
-      .map(element => arr[element]);
-
-    return unique;
-  }
-
-  const unique = getUnique(values, 'day');
+  const unique = values
+    .map(element => element['day'])
+    .map((element, index, final) => final.indexOf(element) === index && index)
+    .filter(element => values[element])
+    .map(element => values[element]);
 
   const labels = unique.map(element => days_of_week[element.day]);
   const data = unique.map(element => {
